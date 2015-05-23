@@ -10,7 +10,7 @@ void ofApp::setup(){
 
   Attractor center;
   center.mPosition = ofPoint(0.0f,0.0f, 0.0f);
-  center.mAttract = 0.1f;
+  center.mAttract = 0.5f;
   mAttractors.push_back(center);
   
   for(vector<Attractor>::iterator it = mAttractors.begin();
@@ -31,7 +31,7 @@ void ofApp::update(){
 void ofApp::draw(){
   ofBackground(100, 100, 100);
   ofSetColor(255, 0, 255);
-  ofDrawBitmapString(ofToString(ofGetFrameRate())+"fps", 10, 15);
+  ofDrawBitmapString(ofToString(ofGetFrameRate())+"fps", 300, 15);
 
   cam.begin();
   rotation++;

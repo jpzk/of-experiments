@@ -22,22 +22,20 @@ void PSystem::setup(ofxPanel *pGui) {
         0.0f, 1.0f));
 
   // initializing of the particles
-  int numberParticles = 1510;
-  int maxX = 100;
-  int maxY = 100;
-  int maxZ = 100;
+  int numberParticles = 3000;
+  int max = 100;
+  int maxV = 10;
 
   for(int i = 0; i < numberParticles; i++) {
     Particle *p = new Particle();
-    int randX = ofRandom(-maxX, maxX);
-    int randY = ofRandom(-maxY, maxY);
-    int randZ = ofRandom(-maxZ, maxZ);
-    int velX = ofRandom(-10, 10);
-    int velY = ofRandom(-10, 10);
-    int velZ = ofRandom(-10, 10);
 
-    ofPoint pos(randX, randY, randZ);
-    ofPoint vel(velX, velY, velZ);
+    ofPoint pos(ofRandom(-max, max),
+        ofRandom(-max, max),
+        ofRandom(-max, max));
+
+    ofPoint vel(ofRandom(-maxV, maxV),
+        ofRandom(-maxV, maxV),
+        ofRandom(-maxV, maxV));
 
     p->setInitialCondition(pos, vel);
     p->setGlobalRefs(&mGlobalDampingf, &mGlobalAttractf);

@@ -2,12 +2,6 @@
 #include "Particle.h"
 
 /**
- * This class defines a Particle of the PSystem
- */
-Particle::Particle() { 
-}
-
-/**
  * This method is used in the setup of the particle
  * to set its initial values
  */

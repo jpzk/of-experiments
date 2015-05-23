@@ -10,12 +10,8 @@ class Particle {
     ofMesh mMesh;
 
   public:
-    ofPoint pos;
-    ofPoint vel;
-    ofPoint frc;
-    ofPoint rep;
+    ofPoint pos, vel, frc;
 
-    Particle();
     void setInitialCondition(ofPoint pPos, ofPoint pVel);
     void setGlobalRefs(float *pDamping, float *pAttraction);
     void resetForce();
