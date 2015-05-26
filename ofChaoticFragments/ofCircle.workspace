@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_workspace_file>
+	<Workspace title="ofCircle">
+		<Project filename="ofCircle.cbp" active="1">
+			<Depends filename="../../../../opt/of_v0.8.4_linux64_release/libs/openFrameworksCompiled/project/linux64/libopenFrameworks.cbp" />
+		</Project>
+		<Project filename="../../../../opt/of_v0.8.4_linux64_release/libs/openFrameworksCompiled/project/linux64/libopenFrameworks.cbp" />
+	</Workspace>
+</CodeBlocks_workspace_file>
