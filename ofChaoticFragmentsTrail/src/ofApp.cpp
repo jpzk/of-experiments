@@ -1,11 +1,13 @@
 #include "ofApp.h"
 
+#include "ofxFastFboReader.h"
+
 //--------------------------------------------------------------
 void ofApp::setup(){
   ofSetVerticalSync(true);
 
   mAlpha = 50;
-  mIsParticlesDrawn = false;
+  mIsParticlesDrawn = true;
 
   // creating the GUI
   mGui.setup();
@@ -76,6 +78,11 @@ void ofApp::update(){
   cam.end();
   shader.end();
   fbo.end();
+
+  mFboReader.readToPixels(fbo, mPixel);
+  mScreenshot.setFromPixels(mPixel);
+  mScreenshot.saveImage("output/image.jpg", 
+      OF_IMAGE_QUALITY_BEST);
 }
 
 //--------------------------------------------------------------

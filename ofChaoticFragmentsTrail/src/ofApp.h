@@ -2,6 +2,7 @@
 
 #include "ofMain.h"
 #include "ofxGui.h"
+#include "ofxFastFboReader.h"
 
 #include "Attractor.h"
 #include "PSystem.h"
@@ -18,6 +19,9 @@ class ofApp : public ofBaseApp{
     ofFbo fbo;
     ofxPanel mGui;
     ofxIntSlider alpha;
+    ofxFastFboReader mFboReader;
+    ofImage mScreenshot;
+    ofPixels mPixel;
     vector<Attractor> mAttractors;
     ofEasyCam cam;
     float rotation;
