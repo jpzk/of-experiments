@@ -14,6 +14,7 @@ class ofApp : public ofBaseApp{
     PSystem mParSystem;
 
     bool mIsParticlesDrawn;
+    int mFrameCount;
     int mAlpha;
     ofImage texture;
     ofFbo fbo;

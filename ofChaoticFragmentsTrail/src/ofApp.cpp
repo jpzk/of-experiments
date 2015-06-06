@@ -1,13 +1,18 @@
 #include "ofApp.h"
-
 #include "ofxFastFboReader.h"
+
+#include <sstream>
+
+#define SSTR( x ) dynamic_cast< std::ostringstream & >( \
+            ( std::ostringstream() << std::dec << x ) ).str()
 
 //--------------------------------------------------------------
 void ofApp::setup(){
   ofSetVerticalSync(true);
 
+  mFrameCount = 0;
   mAlpha = 50;
-  mIsParticlesDrawn = true;
+  mIsParticlesDrawn = false;
 
   // creating the GUI
   mGui.setup();
@@ -48,6 +53,7 @@ void ofApp::setup(){
 
 //--------------------------------------------------------------
 void ofApp::update(){
+  mFrameCount++;
   mParSystem.update();
   mMeshSystem.update();
 
@@ -81,8 +87,8 @@ void ofApp::update(){
 
   mFboReader.readToPixels(fbo, mPixel);
   mScreenshot.setFromPixels(mPixel);
-  mScreenshot.saveImage("output/image.jpg", 
-      OF_IMAGE_QUALITY_BEST);
+  std::string s = SSTR("image" << mFrameCount << ".jpg");
+  mScreenshot.saveImage(s, OF_IMAGE_QUALITY_BEST);
 }
 
 //--------------------------------------------------------------
