@@ -4,8 +4,14 @@
 void ofApp::setup(){
   ofSetVerticalSync(true);
 
+  mAlpha = 50;
+  mIsParticlesDrawn = false;
+
   // creating the GUI
   mGui.setup();
+  alpha.addListener(this, &ofApp::alphaChanged);
+  mGui.add(alpha.setup("FBO alpha",10,0,255));
+ 
   mParSystem.setup(&mGui);
   mMeshSystem.setup(&mGui, &(mParSystem.mParticles));
 
@@ -27,30 +33,59 @@ void ofApp::setup(){
     }else{
         shader.load("shadersGL2/shader");
     }
+
+  texture.loadImage("glitch.png");
+
+  fbo.allocate(ofGetWidth(),ofGetHeight(), GL_RGBA);
+
+  // cleaning the FBO
+  fbo.begin();
+  ofClear(255,255,255,0);
+  fbo.end();
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
   mParSystem.update();
   mMeshSystem.update();
+
+  ofEnableAlphaBlending();
+
+  // drawing into FBO
+  fbo.begin();
+
+  // fading out
+  ofFill();
+  ofSetColor(255,255,255, mAlpha);
+  ofRect(0,0,ofGetWidth(),ofGetHeight());
+  ofNoFill();
+  ofSetColor(255,255,255);
+
+  shader.begin();
+  shader.setUniformTexture("image", texture.getTextureReference(), 1);
+
+  cam.begin();
+  rotation++;
+  ofRotateY(rotation);
+  
+  if(mIsParticlesDrawn) {
+    mParSystem.draw();
+  }
+  
+  mMeshSystem.draw();
+  cam.end();
+  shader.end();
+  fbo.end();
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-  ofBackground(100, 100, 100);
-  ofSetColor(255, 0, 255);
-  ofDrawBitmapString(ofToString(ofGetFrameRate())+"fps", 300, 15);
-
-  shader.begin();
-  cam.begin();
-  rotation++;
-  ofRotateY(rotation);
-  mParSystem.draw();
-  mMeshSystem.draw();
-  cam.end();
-  shader.end();
-
+  fbo.draw(0,0);
   mGui.draw();
+}
+
+void ofApp::alphaChanged(int &pAlpha) {
+  mAlpha = pAlpha; 
 }
 
 //--------------------------------------------------------------
